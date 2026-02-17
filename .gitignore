@@ -1,0 +1,12 @@
+Ass2/q1_execution_time
+Ass2/q2_speedup_efficiency
+Ass2/q3_scaling
+Ass2/q4_scheduling_imbalance
+Ass2/q5_sync_overhead
+Ass2/q6_false_sharing
+Ass2/q7_memory_bandwidth
+Ass3/q1_seq
+Ass3/q2_parallel
+Ass3/q3_optimized
+Ass2/*.o
+Ass3/*.o
