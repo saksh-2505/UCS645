@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     double comm_time = MPI_Wtime() - comm_start;
 
     double comp_start = MPI_Wtime();
-    double sum = 0.0;
+    volatile double sum = 0.0;
     for (long long i = 1; i <= N; ++i) {
         sum += 1.0 / (double)(i + rank);
     }
@@ -38,16 +38,19 @@ int main(int argc, char** argv) {
     double max_total = 0.0;
     MPI_Reduce(&total, &max_total, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
+    double global_sum = 0.0;
+    double local_sum = (double)sum;
+    MPI_Reduce(&local_sum, &global_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
     if (rank == 0) {
         printf("Processes=%d N=%lld\n", size, N);
         printf("Tp (max process total time): %.6f sec\n", max_total);
         printf("Communication time (rank0): %.6f sec\n", comm_time);
         printf("Computation time (rank0): %.6f sec\n", comp_time);
+        printf("Checksum (ignore value, for anti-opt): %.6f\n", global_sum);
         printf("Run with -np 1,2,4,8 and compute:\n");
         printf("Speedup Sp=T1/Tp, Efficiency Ep=Sp/p\n");
     }
-
-    (void)sum;
     MPI_Finalize();
     return 0;
 }
