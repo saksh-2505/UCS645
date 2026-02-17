@@ -8,5 +8,12 @@ Ass2/q7_memory_bandwidth
 Ass3/q1_seq
 Ass3/q2_parallel
 Ass3/q3_optimized
+Ass4/q1_hello_mpi
+Ass4/q2_send_recv
+Ass4/q3_broadcast
+Ass4/q4_reduce_sum
+Ass4/q5_matrix_vector_mpi
+Ass4/q6_perf_metrics
 Ass2/*.o
 Ass3/*.o
+Ass4/*.o
